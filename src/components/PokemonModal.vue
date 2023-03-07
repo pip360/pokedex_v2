@@ -1,9 +1,7 @@
 <template>
-
-  <!-- modal -->
-
+  <!-- modal fetch -->
   <div class="modal" tabindex="-1">
-    <div class="modal-dialog">
+    <!-- <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title">{{ pokemon.name }} detalles</h2>
@@ -70,13 +68,59 @@
           </button>
         </div>
       </div>
+    </div> -->
+  </div>
+
+  <!-- modal axios -->
+  <div class="modal" tabindex="-1">
+    <!-- v-for="(data, index) in pokemons" :key="index" -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ pokemon_info }} </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            @click="$emit('close')"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            @click="$emit('close')"
+          >
+            Close
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+
+/* axios */
 export default {
-  
+    props: {
+      pokemon_info: []
+    },
+    data() {
+      return {
+        
+      }
+    },
+}
+/* fetch */
+/* export default {
+  name: "PokeModal",
+
   props: ["pokemonUrl", "imageUrl"],
   data: () => {
     return {
@@ -105,18 +149,17 @@ export default {
   },
   created() {
     this.fetchData();
-  },
-};
+  }, 
+}; */
 </script>
 
 <style lang="scss" scoped>
-
 .modal-header h2:first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .modal-header h2 {
-    text-transform: lowercase;
+  text-transform: lowercase;
 }
 .modal {
   display: flex;
@@ -141,7 +184,6 @@ export default {
     padding: 50px 0 0;
     background-color: #fff;
     border-radius: 5px;
-    
 
     .image {
       display: flex;

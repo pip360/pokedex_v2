@@ -1,6 +1,7 @@
 <template>
+  <!-- anterior -->
   <div class="list">
-    <div
+    <!-- <div 
       class="card"
       v-for="(pokemon, index) in pokemons"
       :key="'poke' + index"
@@ -20,12 +21,71 @@
     </div>
     <div id="scroll-trigger" ref="infinitescrolltrigger">
       <i class="fas fa-spinner fa-spin"></i>
+    </div> -->
+  </div>
+  <!-- axios -->
+  <div class="list">
+    <div class="card" v-for="(data, index) in pokemons" :key="index">
+      <img :src="data.url.front_default" @click="send_info(data)"/>
+      <div class="card-body">
+        <h3 class="card-title">{{ data.name }}</h3>
+        <a class="btn btn-dark" @click="showPokedetails(data)">
+          Detalles
+        </a>
+      </div>
     </div>
+    <!-- mostrar modal -->
+    <modal :pokemon_info="selected_pokemon" v-if="showModal" @close="showModal = false"/>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import Modal from './PokemonModal.vue';
+/* import { response } from 'express'; */
+/* axios */
 export default {
+  data() {
+    return {
+      pokemons: [],
+      showModal: false,
+      selected_pokemon: [],
+    };
+  },
+  components: {
+    Modal
+  },
+  created() {
+    let instance = this;
+
+    for (let i = 0; i <= 5; i++) {
+      axios
+        .get(`https://pokeapi.co/api/v2/pokemon/${i + 1}`)
+        .then((response) => {
+          let pokemon = {
+            abilities: response.data.abilities,
+            url: response.data.sprites.other.dream_world,
+            name: response.data.name,
+          };
+          instance.pokemons.push(pokemon);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    console.log(this.pokemons)
+  },
+  methods: {
+    showPokedetails(){
+      this.showModal= true;
+    }, 
+    send_info(pokemon_info){
+      this.selected_pokemon = pokemon_info
+    }
+  },
+};
+/* anterior */
+/* export default {
   props: ["imageUrl", "apiUrl"],
   data: () => {
     return {
@@ -57,6 +117,7 @@ export default {
           console.log(error);
         });
     },
+    
     scrollTrigger() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -83,16 +144,16 @@ export default {
   mounted() {
     this.scrollTrigger();
   },
-};
+}; */
 </script>
 
 <style lang="scss" scoped>
 .card-body h3:first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .card-body h3 {
-    text-transform: lowercase;
+  text-transform: lowercase;
 }
 .card {
   transition: transform 0.5s;

@@ -1,13 +1,15 @@
 <template>
   <!-- home -->
-  <pokemon-navbar/>
+  
   <div id="app">
+    <pokemon-navbar/>
     <pokemon-home/>
   </div>
+  <router-view/>
 </template>
 
 <script>
-import PokemonHome from './components/PokemonHome.vue'
+import PokemonHome from './components/PokemonHome.vue' 
 import PokemonNavbar from './components/PokemonNavbar.vue'
 
 export default {
