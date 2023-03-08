@@ -2,7 +2,7 @@
   <div>
     <pokemon-banner />
 
-    <poke-barra />
+    
     <div
       class="container d-flex justify-content-center align-items-center flex-column p-10"
     >
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import PokeBarra from "./PokeBarra.vue";
 import PokemonList from "./PokemonList.vue";
 import PokemonModal from "./PokemonModal.vue";
 import PokemonBanner from "./PokemonBanner.vue";
@@ -34,7 +33,6 @@ export default {
     PokemonList,
     PokemonModal,
     PokemonBanner,
-    PokeBarra,
     PokeFooter,
   },
   methods: {
