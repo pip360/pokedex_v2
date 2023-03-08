@@ -1,51 +1,68 @@
 <template>
   <!-- modal axios -->
-  <div class="modal" tabindex="-1">
+  <div
+    class="d-flex justify-content-center align-items-start position-fixed top-0 left-0 p-9"
+    style="
+      background-color: rgba(25, 22, 24, 0.7);
+      width: calc(100% - 20px);
+      height: calc(100vh - 0px);
+    "
+    tabindex="-1"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
-        <!-- modal header -->
-        <div class="modal-header">
-          <h2 class="modal-title">Detalles de {{ pokemon_info.name }}</h2>
-
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            @click="$emit('close')"
-          ></button>
-        </div>
         <!-- modal body -->
-        <div class="modal-body">
+        <div class="modal-body d-flex">
           <!-- imagen -->
-          <div class="modal-view">
-            <img class="image"
-            width="100"
-            height="100"
-            :src="pokemon_info.urldefault.front_default" />
-            <div class="data">
+          <div
+          class="modal body d-flex justify-content-center align-items-center flex-column position-relative w-100 mw p-1 bg-white rounded mw-510"
+          >
+            <!-- modal header -->
+            <div
+            class="text-center mt-2 text-capitalize"
+            >
+            <h2 class="modal-title">Detalles de {{ pokemon_info.name }}</h2>
+          </div>
+          
+          <img
+          class="d-flex justify-content-center align-items-center bg-dark rounded-circle overflow-hidden w-150 h-150"
+          
+          width="100"
+          height="100"
+          :src="pokemon_info.urldefault.front_default"
+          />
+          
+            <div
+              class="display-flex justify-content-start align-items-center flex-column w-100 mb-40"
+            >
               <!-- name -->
-              <h2 class="mt-3">{{ pokemon_info.name }}</h2>
+              <h2 class="mt-3 text-capitalize text-center">
+                {{ pokemon_info.name }}
+              </h2>
               <!-- XP -->
-              <div class="property">
-                <div class="left">Experiencia</div>
-                <div class="right">{{ pokemon_info.xp }} XP</div>
+              <div class="w-90 mw-400 border-bottom-1 border-white mb-b10">
+                <div class="ms-2 float-start">Experiencia</div>
+                <div class="me-2 text-end">{{ pokemon_info.xp }} XP</div>
               </div>
               <!-- alura -->
-              <div class="property">
-                <div class="left">Altura</div>
-                <div class="right">{{ pokemon_info.height / 10 }} m</div>
+              <div class="w-90 mw-400 border-bottom-1 border-white mb-b10">
+                <div class="ms-2 float-start">Altura</div>
+                <div class="me-2 text-end">
+                  {{ pokemon_info.height / 10 }} m
+                </div>
               </div>
               <!-- peso -->
-              <div class="property">
-                <div class="left">Peso</div>
-                <div class="right">{{ pokemon_info.weight / 10 }} kg</div>
+              <div class="w-90 mw-400 border-bottom-1 border-white mb-b10">
+                <div class="ms-2 float-start">Peso</div>
+                <div class="me-2 text-end">
+                  {{ pokemon_info.weight / 10 }} kg
+                </div>
               </div>
               <!-- tipo -->
-              <h3>Tipo</h3>
+              <h5 class="me-2 text-center">Tipo</h5>
               <div class="types">
                 <div
-                  class="type"
+                  class=" rounded-pill text-white fs-6 lh-lg text-capitalize text-break p-5-10 mt-2 text-center bg-dark"
                   v-for="(pokemon, i) in pokemon_info.types"
                   :key="i"
                 >
@@ -53,30 +70,29 @@
                 </div>
               </div>
               <!-- abilities -->
-              <h3>Habilidades</h3>
-              <div class="abilities">
+              <h5 class="me-2 text-center mt-2">Habilidades</h5>
+              <div class="d-flex justify-content-start text-wrap w-90 mw-400">
                 <div
-                  class="ability"
+                  class="me-2 aling-items-center rounded-pill text-white fs-6 lh-lg text-capitalize text-break p-5-10 mt-2 text-center bg-dark"
                   v-for="(pokemon, i) in pokemon_info.abilities"
                   :key="i"
                 >
                   {{ pokemon.ability.name }}
                 </div>
               </div>
+              <!-- modal footer -->
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-dark"
+                  data-bs-dismiss="modal"
+                  @click="$emit('close')"
+                >
+                  Cerrar
+                </button>
             </div>
-
           </div>
         </div>
-        <!-- modal footer -->
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-dark"
-            data-bs-dismiss="modal"
-            @click="$emit('close')"
-          >
-            Cerrar
-          </button>
         </div>
       </div>
     </div>
@@ -95,136 +111,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.modal-header h2:first-letter {
-  text-transform: uppercase;
-}
 
-.modal-header h2 {
-  text-transform: lowercase;
-}
-.modal {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 90px 10px 10px;
-  width: calc(100% - 20px);
-  height: calc(100vh - 20px);
-  background: rgba($color: #000000, $alpha: 0.7);
-
-  .modal-view {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    max-width: 510px;
-    padding: 1px;
-    background-color: #fff;
-    border-radius: 5px;
-
-    .image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 150px;
-      height: 150px;
-      background-color: #333333e8;
-      border-radius: 50%;
-      overflow: hidden;
-      
-    }
-
-    h2 {
-      text-transform: capitalize;
-    }
-
-    .data {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      margin-bottom: 40px;
-
-      .property {
-        width: 90%;
-        max-width: 400px;
-        border-bottom: 1px solid #ccc;
-        margin-bottom: 10px;
-
-        .left {
-          float: left;
-        }
-        .right {
-          float: right;
-        }
-      }
-
-      h3 {
-        width: 90%;
-        max-width: 400px;
-        border-bottom: 1px solid #ccc;
-      }
-
-      .types,
-      .abilities {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        width: 90%;
-        max-width: 400px;
-
-        .ability {
-          margin: 0 10px 10px 0;
-          padding: 5px 10px;
-          border-radius: 20px;
-          color: #fff;
-          font-size: 1rem;
-          letter-spacing: 2px;
-          text-transform: capitalize;
-          word-wrap: none;
-          word-break: keep-all;
-        }
-
-        .type {
-          background-color: #dbdfe3;
-          margin: 0 10px 10px 0;
-          padding: 5px 10px;
-          border-radius: 20px;
-          color: #ffffff;
-          font-size: 1rem;
-          letter-spacing: 2px;
-          text-transform: capitalize;
-          word-wrap: none;
-          word-break: keep-all;
-        }
-        .ability {
-          background-color: #a1a1a1;
-        }
-      }
-    }
-
-    .close {
-      outline: none;
-      border: none;
-      border-radius: 5px;
-      background-color: #333;
-      color: #efefef;
-      padding: 10px 20px;
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-  }
-
-  i {
-    font-size: 2rem;
-    color: #efefef;
-  }
-}
-</style>

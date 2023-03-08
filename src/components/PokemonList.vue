@@ -1,17 +1,24 @@
 <template>
   <!-- axios -->
-  <div class="list mt-2">
+  <div
+    class="list d-grid mw-510 w-100 mt-4"
+    style="
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-gap: 15px;
+    "
+  >
     <div
-      class="card pointer"
+      class="card pe-auto p-15 position-relative rounded-3 h-210 w-160"
+      style="transition: transform 0.2s"
       v-for="(data, index) in pokemons"
       :key="index"
       @click="send_info(data), showPokedetails(data)"
     >
-      <div class="imagen">
+      <div class="imagen position-relative float-start me-2 mt-1">
         <img height="150" width="150" :src="data.url.front_default" />
       </div>
 
-      <div class="card-body">
+      <div class="card-body text-capitalize">
         <h6 class="card-title">{{ data.name }}</h6>
       </div>
     </div>
@@ -76,57 +83,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-.pointer{
-  cursor: pointer;
-}
-.card-body h6:first-letter {
-  text-transform: uppercase;
-}
-
-.card-body h6 {
-  text-transform: lowercase;
-}
-.card {
-  transition: transform 0.3s;
-  padding: 15px;
-  position: relative;
-  border-radius: 20px;
-  height: 210px;
-  width: 160px;
-  color: rgba(255, 255, 255, 0.363) 000;
-}
-
+<style>
 .card:hover {
-  transform: scale(1.03);
-}
-.imagen {
-  position: relative;
-  right: -4px;
-  border-bottom-width: 0;
-  bottom: 0;
-}
-
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-gap: 10px;
-  width: 100%;
-  max-width: 510px;
-
-  article {
-    height: 150px;
-    background-color: #efefef;
-    text-align: center;
-    text-transform: capitalize;
-    border-radius: 5px;
-    cursor: pointer;
-
-    h3 {
-      margin: 0;
-    }
-  }
+  transform: scale(1.06);
 }
 </style>
 

@@ -1,30 +1,24 @@
 <template>
   <div>
     <pokemon-banner />
-    
-    <poke-barra/>
-    <div class="container">
-      
-      <pokemon-list
-      />
-      <pokemon-modal
-        v-if="showDetail"
-      />
-    </div>
-    <poke-footer/>
 
+    <poke-barra />
+    <div
+      class="container d-flex justify-content-center align-items-center flex-column p-10"
+    >
+      <pokemon-list />
+      <pokemon-modal v-if="showDetail" />
+    </div>
+    <poke-footer />
   </div>
 </template>
 
 <script>
-import PokeBarra from "./PokeBarra.vue"
+import PokeBarra from "./PokeBarra.vue";
 import PokemonList from "./PokemonList.vue";
 import PokemonModal from "./PokemonModal.vue";
 import PokemonBanner from "./PokemonBanner.vue";
 import PokeFooter from "./PokeFooter.vue";
-
-
-
 
 export default {
   data: () => {
@@ -42,7 +36,6 @@ export default {
     PokemonBanner,
     PokeBarra,
     PokeFooter,
-    
   },
   methods: {
     setPokemonUrl(url) {
@@ -58,24 +51,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Fresca&display=swap");
-
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 10px;
-  
   font-family: "Fresca", sans-serif;
-
   font-size: 1rem;
   font-weight: normal;
 }
-
-h1 {
-  color: #191919;
-}
-
 </style>
