@@ -19,11 +19,13 @@
         <div class="modal-body">
           <!-- imagen -->
           <div class="modal-view">
-            <img :src="pokemon_info.urldefault.front_default" />
-
+            <img class="image"
+            width="100"
+            height="100"
+            :src="pokemon_info.urldefault.front_default" />
             <div class="data">
               <!-- name -->
-              <h2>{{ pokemon_info.name }}</h2>
+              <h2 class="mt-3">{{ pokemon_info.name }}</h2>
               <!-- XP -->
               <div class="property">
                 <div class="left">Experiencia</div>
@@ -121,7 +123,7 @@ export default {
     position: relative;
     width: 100%;
     max-width: 510px;
-    padding: 50px 0 0;
+    padding: 1px;
     background-color: #fff;
     border-radius: 5px;
 
@@ -129,14 +131,12 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      position: absolute;
-      top: -60px;
-      width: 120px;
-      height: 120px;
-      background-color: #333;
+      width: 150px;
+      height: 150px;
+      background-color: #333333e8;
       border-radius: 50%;
       overflow: hidden;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
+      
     }
 
     h2 {

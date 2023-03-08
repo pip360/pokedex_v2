@@ -1,10 +1,13 @@
 <template>
   <!-- axios -->
-  <h2>¡Explora los Pokemon!</h2><br/>
   <div class="list mt-2">
-    <div class="card" v-for="(data, index) in pokemons" :key="index" @click="send_info(data), showPokedetails(data)">
+    <div
+      class="card pointer"
+      v-for="(data, index) in pokemons"
+      :key="index"
+      @click="send_info(data), showPokedetails(data)"
+    >
       <div class="imagen">
-
         <img height="150" width="150" :src="data.url.front_default" />
       </div>
 
@@ -13,13 +16,17 @@
       </div>
     </div>
     <!-- mostrar modal -->
-    <modal :pokemon_info="selected_pokemon" v-if="showModal" @close="showModal = false"/>
+    <modal
+      :pokemon_info="selected_pokemon"
+      v-if="showModal"
+      @close="showModal = false"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Modal from './PokemonModal.vue';
+import Modal from "./PokemonModal.vue";
 /* axios */
 export default {
   data() {
@@ -30,12 +37,12 @@ export default {
     };
   },
   components: {
-    Modal
+    Modal,
   },
   created() {
     let instance = this;
 
-    for (let i = 0; i <= 5; i++) {
+    for (let i = 0; i <= 101; i++) {
       axios
         .get(`https://pokeapi.co/api/v2/pokemon/${i + 1}`)
         .then((response) => {
@@ -56,21 +63,24 @@ export default {
           console.log(err);
         });
     }
-    console.log(this.pokemons)
+    console.log(this.pokemons);
   },
   methods: {
-    showPokedetails(){
-      this.showModal= true;
-    }, 
-    send_info(pokemon_info){
-      this.selected_pokemon = pokemon_info
-    }
+    showPokedetails() {
+      this.showModal = true;
+    },
+    send_info(pokemon_info) {
+      this.selected_pokemon = pokemon_info;
+    },
   },
 };
-  
 </script>
 
 <style lang="scss" scoped>
+
+.pointer{
+  cursor: pointer;
+}
 .card-body h6:first-letter {
   text-transform: uppercase;
 }
@@ -85,18 +95,18 @@ export default {
   border-radius: 20px;
   height: 210px;
   width: 160px;
-  color: rgba(255, 255, 255, 0.363)000;
+  color: rgba(255, 255, 255, 0.363) 000;
 }
 
 .card:hover {
   transform: scale(1.03);
 }
-.imagen{
+.imagen {
   position: relative;
   right: -4px;
   border-bottom-width: 0;
   bottom: 0;
-} 
+}
 
 .list {
   display: grid;
@@ -118,7 +128,5 @@ export default {
     }
   }
 }
-
-
 </style>
 
