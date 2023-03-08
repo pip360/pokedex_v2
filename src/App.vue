@@ -5,7 +5,6 @@
     <pokemon-navbar/>
     <pokemon-home/>
   </div>
-  <router-view/>
 </template>
 
 <script>

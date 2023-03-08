@@ -1,102 +1,79 @@
 <template>
-  <!-- modal fetch -->
+  <!-- modal axios -->
   <div class="modal" tabindex="-1">
-    <!-- <div class="modal-dialog">
+    <div class="modal-dialog">
       <div class="modal-content">
+        <!-- modal header -->
         <div class="modal-header">
-          <h2 class="modal-title">{{ pokemon.name }} detalles</h2>
+          <h2 class="modal-title">Detalles de {{ pokemon_info.name }}</h2>
+
           <button
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-            @click="closeModal"
+            @click="$emit('close')"
           ></button>
         </div>
+        <!-- modal body -->
         <div class="modal-body">
-          <div class="modal-view" v-if="show">
-            <div v-if="pokemon" class="">
-              <img :src="imageUrl + pokemon.id + '.png'" alt="" />
-            </div>
+          <!-- imagen -->
+          <div class="modal-view">
+            <img :src="pokemon_info.urldefault.front_default" />
 
-            <div v-if="pokemon" class="data">
-              <h2>{{ pokemon.name }}</h2>
-
+            <div class="data">
+              <!-- name -->
+              <h2>{{ pokemon_info.name }}</h2>
+              <!-- XP -->
               <div class="property">
                 <div class="left">Experiencia</div>
-                <div class="right">{{ pokemon.base_experience }} XP</div>
+                <div class="right">{{ pokemon_info.xp }} XP</div>
               </div>
+              <!-- alura -->
               <div class="property">
-              <div class="left">Altura</div>
-              <div class="right">{{ pokemon.height / 10 }} m</div>
+                <div class="left">Altura</div>
+                <div class="right">{{ pokemon_info.height / 10 }} m</div>
               </div>
+              <!-- peso -->
               <div class="property">
                 <div class="left">Peso</div>
-                <div class="right">{{ pokemon.weight / 10 }} kg</div>
+                <div class="right">{{ pokemon_info.weight / 10 }} kg</div>
               </div>
-              <h3>Tipo de Pokemon</h3>
+              <!-- tipo -->
+              <h3>Tipo</h3>
               <div class="types">
                 <div
                   class="type"
-                  v-for="(value, index) in pokemon.types"
-                  :key="'value' + index"
+                  v-for="(pokemon, i) in pokemon_info.types"
+                  :key="i"
                 >
-                  {{ value.type.name }}
+                  {{ pokemon.type.name }}
                 </div>
               </div>
+              <!-- abilities -->
               <h3>Habilidades</h3>
               <div class="abilities">
                 <div
                   class="ability"
-                  v-for="(value, index) in pokemon.abilities"
-                  :key="'value' + index"
+                  v-for="(pokemon, i) in pokemon_info.abilities"
+                  :key="i"
                 >
-                  {{ value.ability.name }}
+                  {{ pokemon.ability.name }}
                 </div>
               </div>
             </div>
+
           </div>
         </div>
+        <!-- modal footer -->
         <div class="modal-footer">
           <button
             type="button"
             class="btn btn-dark"
             data-bs-dismiss="modal"
-            @click="closeModal"
+            @click="$emit('close')"
           >
             Cerrar
-          </button>
-        </div>
-      </div>
-    </div> -->
-  </div>
-
-  <!-- modal axios -->
-  <div class="modal" tabindex="-1">
-    <!-- v-for="(data, index) in pokemons" :key="index" -->
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">{{ pokemon_info }} </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            @click="$emit('close')"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-            @click="$emit('close')"
-          >
-            Close
           </button>
         </div>
       </div>
@@ -105,52 +82,15 @@
 </template>
 
 <script>
-
 /* axios */
 export default {
-    props: {
-      pokemon_info: []
-    },
-    data() {
-      return {
-        
-      }
-    },
-}
-/* fetch */
-/* export default {
-  name: "PokeModal",
-
-  props: ["pokemonUrl", "imageUrl"],
-  data: () => {
-    return {
-      show: false,
-      pokemon: {},
-    };
+  props: {
+    pokemon_info: [],
   },
-  methods: {
-    fetchData() {
-      let req = new Request(this.pokemonUrl);
-      fetch(req)
-        .then((resp) => {
-          if (resp.status === 200) return resp.json();
-        })
-        .then((data) => {
-          this.pokemon = data;
-          this.show = true;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    closeModal() {
-      this.$emit("closeModal");
-    },
+  data() {
+    return {};
   },
-  created() {
-    this.fetchData();
-  }, 
-}; */
+};
 </script>
 
 <style lang="scss" scoped>

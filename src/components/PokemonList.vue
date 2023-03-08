@@ -1,37 +1,15 @@
 <template>
-  <!-- anterior -->
-  <div class="list">
-    <!-- <div 
-      class="card"
-      v-for="(pokemon, index) in pokemons"
-      :key="'poke' + index"
-    >
-      <img
-        :src="imageUrl + pokemon.id + '.png'"
-        width="96"
-        height="96"
-        alt=""
-      />
-      <div class="card-body">
-        <h3 class="card-title">{{ pokemon.name }}</h3>
-        <a class="btn btn-dark" @click="setPokemonUrl(pokemon.url)">
-          Detalles
-        </a>
-      </div>
-    </div>
-    <div id="scroll-trigger" ref="infinitescrolltrigger">
-      <i class="fas fa-spinner fa-spin"></i>
-    </div> -->
-  </div>
   <!-- axios -->
-  <div class="list">
-    <div class="card" v-for="(data, index) in pokemons" :key="index">
-      <img :src="data.url.front_default" @click="send_info(data)"/>
+  <h2>¡Explora los Pokemon!</h2><br/>
+  <div class="list mt-2">
+    <div class="card" v-for="(data, index) in pokemons" :key="index" @click="send_info(data), showPokedetails(data)">
+      <div class="imagen">
+
+        <img height="150" width="150" :src="data.url.front_default" />
+      </div>
+
       <div class="card-body">
-        <h3 class="card-title">{{ data.name }}</h3>
-        <a class="btn btn-dark" @click="showPokedetails(data)">
-          Detalles
-        </a>
+        <h6 class="card-title">{{ data.name }}</h6>
       </div>
     </div>
     <!-- mostrar modal -->
@@ -42,7 +20,6 @@
 <script>
 import axios from "axios";
 import Modal from './PokemonModal.vue';
-/* import { response } from 'express'; */
 /* axios */
 export default {
   data() {
@@ -65,9 +42,15 @@ export default {
           let pokemon = {
             abilities: response.data.abilities,
             url: response.data.sprites.other.dream_world,
+            urldefault: response.data.sprites,
             name: response.data.name,
+            xp: response.data.base_experience,
+            height: response.data.height,
+            weight: response.data.weight,
+            types: response.data.types,
           };
           instance.pokemons.push(pokemon);
+          /* console.log(response.data.base_experience); */
         })
         .catch((err) => {
           console.log(err);
@@ -84,84 +67,37 @@ export default {
     }
   },
 };
-/* anterior */
-/* export default {
-  props: ["imageUrl", "apiUrl"],
-  data: () => {
-    return {
-      pokemons: [],
-      nextUrl: "",
-      currentUrl: "",
-    };
-  },
-  methods: {
-    fetchData() {
-      let req = new Request(this.currentUrl);
-      fetch(req)
-        .then((resp) => {
-          if (resp.status === 200) return resp.json();
-        })
-        .then((data) => {
-          this.nextUrl = data.next;
-          data.results.forEach((pokemon) => {
-            pokemon.id = pokemon.url
-              .split("/")
-              .filter(function (part) {
-                return !!part;
-              })
-              .pop();
-            this.pokemons.push(pokemon);
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    
-    scrollTrigger() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > 0 && this.nextUrl) {
-            this.next();
-          }
-        });
-      });
-
-      observer.observe(this.$refs.infinitescrolltrigger);
-    },
-    next() {
-      this.currentUrl = this.nextUrl;
-      this.fetchData();
-    },
-    setPokemonUrl(url) {
-      this.$emit("setPokemonUrl", url);
-    },
-  },
-  created() {
-    this.currentUrl = this.apiUrl;
-    this.fetchData();
-  },
-  mounted() {
-    this.scrollTrigger();
-  },
-}; */
+  
 </script>
 
 <style lang="scss" scoped>
-.card-body h3:first-letter {
+.card-body h6:first-letter {
   text-transform: uppercase;
 }
 
-.card-body h3 {
+.card-body h6 {
   text-transform: lowercase;
 }
 .card {
-  transition: transform 0.5s;
+  transition: transform 0.3s;
+  padding: 15px;
+  position: relative;
+  border-radius: 20px;
+  height: 210px;
+  width: 160px;
+  color: rgba(255, 255, 255, 0.363)000;
 }
 
 .card:hover {
-  transform: scale(1.07);
+  transform: scale(1.03);
 }
+.imagen{
+  position: relative;
+  right: -4px;
+  border-bottom-width: 0;
+  bottom: 0;
+} 
+
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -183,14 +119,6 @@ export default {
   }
 }
 
-#scroll-trigger {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 150px;
-  font-size: 2rem;
-  color: #efefef;
-}
+
 </style>
 
