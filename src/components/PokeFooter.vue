@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top "
+    class="d-flex bg-dark flex-wrap justify-content-between align-items-center py-3 my-4 border-top "
   >
     <div class="col-md-4 d-flex align-items-center">
       <a

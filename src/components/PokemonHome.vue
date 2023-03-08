@@ -11,8 +11,8 @@
         v-if="showDetail"
       />
     </div>
-
     <poke-footer/>
+
   </div>
 </template>
 

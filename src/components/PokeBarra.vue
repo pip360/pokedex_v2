@@ -1,5 +1,5 @@
 <template>
-    <div class="mensaje">
+    <div class="mensaje ">
 
         
           <img 
@@ -53,7 +53,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Fresca&display=swap");
 .mensaje {
  
-  display: flex;
+  
   justify-content: center;
   align-items: center;
   text-align: center;
